@@ -1,0 +1,84 @@
+{
+    "title": "Stackdriver Trace",
+    "description": "Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenCensus.\n",
+    "docsUrl": "https://cloud.google.com/trace",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/cloudtrace/v2/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://cloudtrace.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "cloudtrace_projects_traces_spans_createSpan": {
+            "main": "./lib/actions/cloudtrace_projects_traces_spans_createSpan.js",
+            "title": "Creates a new span.",
+            "description": "Creates a new span.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cloudtrace_projects_traces_spans_createSpan.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "cloudtrace_projects_traces_batchWrite": {
+            "main": "./lib/actions/cloudtrace_projects_traces_batchWrite.js",
+            "title": "Sends new spans to new or existing traces. You cannot update\nexisting spans.",
+            "description": "Sends new spans to new or existing traces. You cannot update\nexisting spans.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/cloudtrace_projects_traces_batchWrite.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
